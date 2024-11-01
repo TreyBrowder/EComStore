@@ -9,9 +9,18 @@ import SwiftUI
 
 @main
 struct EcomStoreApp: App {
+   @State var authVM = AuthViewModel()
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            Group {
+                if true {
+                    LoginView()
+                } else {
+                    MainTabView()
+                }
+            }
+            .environment(authVM)
         }
     }
 }

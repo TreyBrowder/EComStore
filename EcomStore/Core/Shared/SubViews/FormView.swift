@@ -49,12 +49,14 @@ struct FormView: View {
         FormView(value: .constant("Text Field Sample Text"),
                  icon: "checkmark.circle.fill",
                  placeholder: "Enter Text",
-                 validateState: .valid);
+                 validateState: .valid)
+        
         FormView(value: .constant("Secure"),
                  icon: "lock.circle",
                  placeholder: "Enter Password",
                  isSecure: true,
-                 validateState: .invalid);
+                 validateState: .invalid)
+        
         FormView(value: .constant(""),
                  icon: "checkmark.circle",
                  placeholder: "Full Name",
