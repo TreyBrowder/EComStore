@@ -17,25 +17,47 @@ struct FormView: View {
     
     var body: some View {
         HStack() {
-            
-            Image(systemName: icon)
-                .foregroundStyle(validateState.shadowColor)
-                .padding(4)
-            
-            if isSecure {
-                SecureField(placeholder, text: $value)
-            } else {
-                TextField(placeholder, text: $value)
-
+            Group {
+                if isSecure {
+                    SecureField(placeholder, text: $value)
+                } else {
+                    TextField(placeholder, text: $value)
+                }
+                
+                Image(systemName: icon)
+                    .foregroundStyle(validateState.shadowColor)
+                    .padding(4)
             }
+            .font(.system(size: 16, design: .monospaced))
+            .textFieldStyle(.roundedBorder)
+            .multilineTextAlignment(.leading)
+            .autocorrectionDisabled(true)
+            .textInputAutocapitalization(.never)
+        }
+        .overlay {
+            RoundedRectangle(cornerRadius: 8)
+                .stroke(lineWidth: 1)
+                .foregroundStyle(validateState.shadowColor)
+                .shadow(radius: 1, x: 0, y: 2)
         }
 
     }
 }
 
 #Preview {
-    FormView(value: .constant("Field Text"),
-             icon: "",
-             placeholder: "Enter Text",
-             validateState: .valid)
+    VStack{
+        FormView(value: .constant("Text Field Sample Text"),
+                 icon: "checkmark.circle.fill",
+                 placeholder: "Enter Text",
+                 validateState: .valid);
+        FormView(value: .constant("Secure"),
+                 icon: "lock.circle",
+                 placeholder: "Enter Password",
+                 isSecure: true,
+                 validateState: .invalid);
+        FormView(value: .constant(""),
+                 icon: "checkmark.circle",
+                 placeholder: "Full Name",
+                 validateState: .empty)
+    }
 }
