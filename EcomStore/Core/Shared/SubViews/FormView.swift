@@ -25,6 +25,8 @@ struct FormView: View {
                 }
                 
                 Image(systemName: icon)
+                    .resizable()
+                    .frame(width: 26, height: 26)
                     .foregroundStyle(validateState.shadowColor)
                     .padding(4)
             }
