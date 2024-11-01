@@ -26,21 +26,59 @@ struct LoginView: View {
                     FormView(value: $authVmBindable.emailLogin,
                              icon: "envelope.circle",
                              placeholder: "Email",
-                             validateState: authVM.emailValidState)
+                             validateState: authVmBindable.emailValidState)
                     
                     FormView(value: $authVmBindable.passwordLogin,
                              icon: "lock.circle",
                              placeholder: "Password",
                              isSecure: true,
-                             validateState: authVM.pwdValidState)
+                             validateState: authVmBindable.pwdValidState)
+                    
+                    Button {
+                        //Calls to backend
+                        print("Login Button Tapped")
+                    } label: {
+                        Text("Login")
+                            .buttonTxtStyle()
+                    }
+                    .disabled(authVmBindable.isValidLogin ? false : true)
+                    
+                    NavigationLink {
+                        ForgotPasswordView()
+                            .navigationBarBackButtonHidden()
+                    } label: {
+                        NavLinkView(text: "Forgot", subText: "Password")
+                    }
+
                 }
-                .padding(.horizontal, 8)
-                
+                .padding(.horizontal, 18)
             }
         }
     }
 }
 
-//#Preview {
-//    LoginView()
-//}
+#Preview {
+    LoginView()
+        .environment(AuthViewModel())
+}
+
+
+struct ButtonTxtStyle: ViewModifier {
+    func body(content: Content) -> some View {
+        content
+            .frame(minWidth: 0, maxWidth: .infinity)
+            .frame(height: 20)
+            .padding()
+            .foregroundStyle(.white)
+            .font(.system(size: 24))
+            .fontWeight(.heavy)
+            .background(Color.cyan)
+            .cornerRadius(10)
+    }
+}
+
+extension View {
+    public func buttonTxtStyle() -> some View {
+        self.modifier(ButtonTxtStyle())
+    }
+}

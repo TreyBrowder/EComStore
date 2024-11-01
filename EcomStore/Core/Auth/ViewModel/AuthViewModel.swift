@@ -12,8 +12,7 @@ import Observation
     
     // Activate login button or not
     var isValidLogin: Bool = false
-    
-    //
+
     var emailValidState: ValidateState = .empty
     var pwdValidState: ValidateState = .empty
     

@@ -36,5 +36,4 @@ func isValidPwd(_ pwd: String) -> Bool {
     
     return !pwd.isEmpty
     && pwd.count > 6
-    
 }
